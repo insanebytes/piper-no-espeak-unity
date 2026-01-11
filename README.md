@@ -127,13 +127,21 @@ Choose a voice from the official [rhasspy/piper-voices](https://huggingface.co/r
 
 ---
 
----
-
 ## Links
 * [Open Phonemizer ONNX Models (Hugging Face)](https://huggingface.co/lookbe/open-phonemizer-onnx)
 * [Piper Official](https://github.com/rhasspy/piper)
 * [Piper Voices (Hugging Face)](https://huggingface.co/rhasspy/piper-voices)
 * [onnxruntime-unity Repository](https://github.com/asus4/onnxruntime-unity)
 
+---
+
 ## License
 The integration code and phonemizer logic are provided under permissive licenses (MIT/Apache 2.0). Individual voice models and phonemizer weights are subject to the licenses provided on their respective repositories.
+
+---
+
+## ☕ Support the Developer
+
+If this helps you, consider supporting me:
+
+[<img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" width="200">](https://www.buymeacoffee.com/lookbe)
