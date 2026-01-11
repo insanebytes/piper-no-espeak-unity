@@ -2,10 +2,10 @@ namespace PiperTTS
 {
     public enum ModelStatus
     {
-        Init,
-        Error,
-        Loading,
-        Ready,
-        Generate,
+        Error = -1,
+        Init = 0,
+        Loading = 1,
+        Ready = 2,
+        Generate = 3,
     }
 }
