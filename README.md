@@ -54,8 +54,29 @@ By using **ONNX Runtime**, this integration provides a highly optimized C++ back
 ## Getting Started
 
 ### 1. Installation
-1. **Clone the repository** into your Unity `Assets` folder.
-2. **Install ONNX Runtime**: Follow the installation guide for [onnxruntime-unity](https://github.com/asus4/onnxruntime-unity).
+Open your project's `Packages/manifest.json` and update it to include the scoped registry and the Git dependencies.
+
+
+```json
+{
+  "scopedRegistries": [
+    {
+      "name": "npm",
+      "url": "https://registry.npmjs.com",
+      "scopes": [
+        "com.github.asus4"
+      ]
+    }
+  ],
+  "dependencies": {
+    "com.github.asus4.onnxruntime": "0.4.2",
+    "com.github.asus4.onnxruntime.unity": "0.4.2",
+    "ai.lookbe.piper": "https://github.com/lookbe/piper-no-espeak-unity.git",
+
+    ... other dependencies
+  }
+}
+```
 
 ### 2. Required Model Assets
 To run the system, you need two sets of models: the **Phonemizer** (to convert text to phoneme IDs) and the **Piper Voice** (to synthesize audio). Place all files in your `Assets/StreamingAssets` folder.
@@ -84,6 +105,18 @@ Choose a voice from the official [rhasspy/piper-voices](https://huggingface.co/r
 
 ---
 
+## Testing
+
+1.  **Import Samples:** Go to the Package Manager, select **Piper TTS Unity**, and import the **BasicPiper** sample.
+2.  **Configure Paths:**
+    * Select the `PiperTTS` object in the Hierarchy.
+    * In the Inspector, locate the **Piper Model Path**, **Piper Config Path**, **Phonemizer Model Path**, **Phonemizer Config Path**, **Phonemizer Dict Path** fields.
+    * **Important:** Paste the **absolute path** (e.g., `C:\Models\model.onnx`) for both files.
+3.  **Run:** Press Play.
+
+> **Note:** You can extend the component script to use `Application.streamingAssetsPath` if you wish to bundle models with your build, but the core component requires absolute paths for the initial backend load.
+---
+
 ## Platform Support
 
 | Platform | Status | Runtime Backend | License |
@@ -93,10 +126,6 @@ Choose a voice from the official [rhasspy/piper-voices](https://huggingface.co/r
 | **Android** | ✅ | ONNX (NNAPI/CPU) | Permissive |
 
 ---
-
-## Demo Video
-
-[![Piper Unity](https://img.youtube.com/vi/i2LvqWICb40/0.jpg)](https://www.youtube.com/watch?v=i2LvqWICb40)
 
 ---
 
