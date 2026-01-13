@@ -79,7 +79,7 @@ Open your project's `Packages/manifest.json` and update it to include the scoped
 ```
 
 ### 2. Required Model Assets
-To run the system, you need two sets of models: the **Phonemizer** (to convert text to phoneme IDs) and the **Piper Voice** (to synthesize audio). Place all files in your `Assets/StreamingAssets` folder.
+To run the system, you need two sets of models: the **Phonemizer** (to convert text to phoneme IDs) and the **Piper Voice** (to synthesize audio).
 
 #### A. Phonemizer Assets
 Download from [lookbe/open-phonemizer-onnx](https://huggingface.co/lookbe/open-phonemizer-onnx/tree/main):
@@ -91,17 +91,6 @@ Download from [lookbe/open-phonemizer-onnx](https://huggingface.co/lookbe/open-p
 Choose a voice from the official [rhasspy/piper-voices](https://huggingface.co/rhasspy/piper-voices/tree/main):
 1. Select your language and voice (e.g., `en/en_US/amy/low/`).
 2. Download **both** the `.onnx` file and the `.onnx.json` file.
-
-### 3. Setup PiperManager
-1. In your Unity Scene, select the GameObject with the **PiperManager** component.
-2. In the Inspector, locate the **Asset Path** field.
-3. Set the paths to point to your downloaded assets within the `StreamingAssets` folder.
-4. Ensure the filenames match your downloaded files exactly.
-
-### 4. Run the Demo
-1. Open the scene located at `Assets/Scenes/PiperScene.unity`.
-2. Press **Play**.
-3. Enter text in the UI and click **Submit** to trigger local synthesis.
 
 ---
 
