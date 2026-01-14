@@ -124,6 +124,11 @@ Choose a voice from the official [rhasspy/piper-voices](https://huggingface.co/r
 
 ---
 
+## Credits 
+This library contains code originally developed by [skykim](https://github.com/skykim/piper-unity), which has been significantly modified and expanded.
+
+---
+
 ## License
 The integration code and phonemizer logic are provided under permissive licenses (MIT/Apache 2.0). Individual voice models and phonemizer weights are subject to the licenses provided on their respective repositories.
 
