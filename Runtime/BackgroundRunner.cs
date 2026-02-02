@@ -66,7 +66,7 @@ namespace PiperTTS
             }, cts.Token);
         }
 
-        protected async Task BackgroundStop()
+        protected void BackgroundStop()
         {
             if (isStopping)
             {
@@ -84,7 +84,7 @@ namespace PiperTTS
             {
                 try
                 {
-                    await backgroundTask; // wait for it to finish
+                    backgroundTask.Wait(); // wait for it to finish
                 }
                 catch (OperationCanceledException)
                 {
