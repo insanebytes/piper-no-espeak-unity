@@ -6,6 +6,8 @@ A Fast, Local Neural Text-to-Speech System: Piper in Unity for Multi-Platform.
 
 **piper-unity** is a high-performance, on-device text-to-speech (TTS) integration for Unity. This version is a specialized fork/port of the [Piper](https://github.com/rhasspy/piper) project, optimized for real-time applications and game development.
 
+This fork included voice selection individual for each inference.
+
 ### ⚖️ Why this version?
 Unlike the original Piper implementation which relies on `espeak-ng` (GPL Licensed), this repository has been rewritten to be **commercial-friendly** and **performant**:
 - **Permissive Licensing**: Removed all GPL-licensed components. 
