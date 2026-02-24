@@ -99,11 +99,9 @@ Choose a voice from the official [rhasspy/piper-voices](https://huggingface.co/r
 1.  **Import Samples:** Go to the Package Manager, select **Piper TTS Unity**, and import the **BasicPiper** sample.
 2.  **Configure Paths:**
     * Select the `PiperTTS` object in the Hierarchy.
-    * In the Inspector, locate the **Piper Model Path**, **Piper Config Path**, **Phonemizer Model Path**, **Phonemizer Config Path**, **Phonemizer Dict Path** fields.
-    * **Important:** Paste the **absolute path** (e.g., `C:\Models\model.onnx`) for both files.
+    * In the Inspector, locate the **Piper Model File Path**, **Piper Config File Path**, **Phonemizer Model File Path**, **Phonemizer Config File Path**, **Phonemizer Dict File Path** fields. Based on StreamingAssets Path
+    * **Important:** Paste the **path inside StreamingAssets folder** (e.g., `piper\model.onnx`) for both files.
 3.  **Run:** Press Play.
-
-> **Note:** You can extend the component script to use `Application.streamingAssetsPath` if you wish to bundle models with your build, but the core component requires absolute paths for the initial backend load.
 ---
 
 ## Platform Support
@@ -127,6 +125,7 @@ Choose a voice from the official [rhasspy/piper-voices](https://huggingface.co/r
 ## Credits 
 This library contains code originally developed by [skykim](https://github.com/skykim/piper-unity), which has been significantly modified and expanded.
 
+This fork is bassed on lookbe work (https://github.com/lookbe/piper-no-espeak-unity) and modified to my use cases
 ---
 
 ## License
@@ -136,6 +135,6 @@ The integration code and phonemizer logic are provided under permissive licenses
 
 ## ☕ Support the Developer
 
-If this helps you, consider supporting me:
+If this helps you, consider supporting the original developer lookbe:
 
 [<img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" width="200">](https://www.buymeacoffee.com/lookbe)

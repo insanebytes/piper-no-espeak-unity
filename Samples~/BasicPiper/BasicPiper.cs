@@ -76,7 +76,7 @@ public class BasicPiper : MonoBehaviour
             if (!string.IsNullOrEmpty(message))
             {
                 chatHistory.text += "tts: " + message + "\n";
-                tts.Prompt(message);
+                tts.Prompt(message,1);
                 ClearInput();
             }
         }
