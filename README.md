@@ -69,9 +69,9 @@ Open your project's `Packages/manifest.json` and update it to include the scoped
     }
   ],
   "dependencies": {
-    "com.github.asus4.onnxruntime": "0.4.2",
-    "com.github.asus4.onnxruntime.unity": "0.4.2",
-    "ai.lookbe.piper": "https://github.com/lookbe/piper-no-espeak-unity.git",
+    "com.github.asus4.onnxruntime": "0.4.4",
+    "com.github.asus4.onnxruntime.unity": "0.4.4",
+    "ai.insanebytes.piper":"https://github.com/insanebytes/piper-no-espeak-unity.git",
 
     ... other dependencies
   }
