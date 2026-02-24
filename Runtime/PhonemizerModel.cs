@@ -13,6 +13,12 @@ using static PiperTTS.PiperModel;
 
 namespace PiperTTS
 {
+	public class ResponsePayload
+	{
+		public string phonemized;
+		public int voiceId;
+	}
+	
     public class TokenizerConfig
     {
         [JsonProperty("text_symbols")]
@@ -133,7 +139,7 @@ namespace PiperTTS
         }
 
         // Define a delegate (or use Action<T>)
-        public delegate void ResponseGeneratedDelegate(string response);
+        public delegate void ResponseGeneratedDelegate(ResponsePayload response);
         public event ResponseGeneratedDelegate OnResponseGenerated;
 
         InferenceSession _session;
@@ -218,9 +224,10 @@ namespace PiperTTS
         {
             public string Prompt;
             public string Lang;
+			public int Voice;
         }
 
-        public void Phonemize(string prompt)
+        public void Phonemize(string prompt,int voiceId)
         {
             if (string.IsNullOrEmpty(prompt))
             {
@@ -241,7 +248,7 @@ namespace PiperTTS
             }
 
             status = ModelStatus.Generate;
-            RunBackground(new PromptPayload() { Prompt = prompt, Lang = "en_us" }, RunPhonemize);
+            RunBackground(new PromptPayload() { Prompt = prompt, Lang = "en_us",Voice = voiceId }, RunPhonemize);
         }
 
         void RunPhonemize(PromptPayload payload, CancellationToken cts)
@@ -249,12 +256,18 @@ namespace PiperTTS
             try
             {
                 string response = PhonemizeInternal(payload.Prompt, payload.Lang, cts);
-                PostResponse(response);
+				ResponsePayload responsePayload = new ResponsePayload();
+				
+				responsePayload.phonemized = response;
+                responsePayload.voiceId = payload.Voice;
+                PostResponse(responsePayload);
             }
             catch (System.Exception ex)
             {
                 Debug.LogError($"An unexpected error occurred during RunDecode: {ex.Message}");
-                PostResponse(string.Empty);
+				
+				ResponsePayload responsePayload = new ResponsePayload();
+                PostResponse(responsePayload);
             }
             finally
             {
@@ -265,11 +278,11 @@ namespace PiperTTS
         string PhonemizeInternal(string prompt, string lang, CancellationToken cts)
         {
             // Simple split by punctuation
-            string pattern = @"([().,:?!/–\s])"; // Punctuation + whitespace
+            string pattern = @"([().,:?!/ï¿½\s])"; // Punctuation + whitespace
             string[] parts = Regex.Split(prompt, pattern);
 
             var resultParts = new List<string>();
-            var punctSet = new HashSet<string>() { "(", ")", ".", ",", ":", "?", "!", "/", "–", " ", "-" };
+            var punctSet = new HashSet<string>() { "(", ")", ".", ",", ":", "?", "!", "/", "ï¿½", " ", "-" };
 
             // Check dictionary availability for lang
             Dictionary<string, string> langDict = null;
@@ -352,7 +365,7 @@ namespace PiperTTS
             return string.Join("", resultParts);
         }
 
-        void PostResponse(string response)
+        void PostResponse(ResponsePayload response)
         {
             unityContext?.Post(_ => OnResponseGenerated?.Invoke(response), null);
         }

@@ -15,31 +15,32 @@ namespace PiperTTS
 
     public class PiperTTS : MonoBehaviour
     {
-        [Header("Piper")]
-        public string piperModelPath = string.Empty;
-        public string piperConfigPath = string.Empty;
+        [Header("Piper")] public string piperModelFilePath = "/piper/en_US-libritts-high.onnx";
+        public string piperConfigFilePath = "/piper/en_US-libritts-high.onnx.json";
 
-        [Header("Phonemizer")]
-        public string phonemizerModelPath = string.Empty;
-        public string phonemizerConfigPath = string.Empty;
-        public string phonemizerDictPath = string.Empty;
+        [Header("Phonemizer")] public string phonemizerModelFilePath = "/piper/model.onnx";
+        public string phonemizerConfigFilePath = "/piper/tokenizer.json";
+        public string phonemizerDictFilePath = "/piper/phoneme_dict.json";
 
+        string piperModelPath = string.Empty;
+        string piperConfigPath = string.Empty;
 
-        [Header("Config")]
-        [Range(0.0f, 1.0f)]
-        public float commaDelay = 0.1f;
+        string phonemizerModelPath = string.Empty;
+        string phonemizerConfigPath = string.Empty;
+        string phonemizerDictPath = string.Empty;
 
-        [Range(0.0f, 1.0f)]
-        public float periodDelay = 0.5f;
+        [Header("Config")] [Range(0.0f, 1.0f)] public float commaDelay = 0.1f;
 
-        [Range(0.0f, 1.0f)]
-        public float questionExclamationDelay = 0.6f;
+        [Range(0.0f, 1.0f)] public float periodDelay = 0.5f;
+
+        [Range(0.0f, 1.0f)] public float questionExclamationDelay = 0.6f;
 
         protected PiperModel piper;
         protected PhonemizerModel phonemizer;
         protected AudioSource audioSource;
 
         public delegate void StatusChangedDelegate(ModelStatus status);
+
         public event StatusChangedDelegate OnStatusChanged;
 
         private ModelStatus _status = ModelStatus.Init;
@@ -101,7 +102,7 @@ namespace PiperTTS
             status = ModelStatus.Ready;
         }
 
-        public void Prompt(string prompt)
+        public void Prompt(string prompt, int voiceId = 0)
         {
             if (string.IsNullOrEmpty(prompt))
             {
@@ -115,7 +116,7 @@ namespace PiperTTS
             }
 
             status = ModelStatus.Generate;
-            StartCoroutine(SynthesizeAndPlay(prompt));
+            StartCoroutine(SynthesizeAndPlay(prompt, voiceId));
         }
 
         string PreProcessNumbers(string text)
@@ -125,7 +126,8 @@ namespace PiperTTS
             {
                 try
                 {
-                    if (double.TryParse(match.Value, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out double number))
+                    if (double.TryParse(match.Value, System.Globalization.NumberStyles.Any,
+                            System.Globalization.CultureInfo.InvariantCulture, out double number))
                     {
                         return number.ToWords();
                     }
@@ -134,11 +136,12 @@ namespace PiperTTS
                 {
                     Debug.LogWarning(e.Message);
                 }
+
                 return match.Value;
             });
         }
 
-        IEnumerator SynthesizeAndPlay(string prompt)
+        IEnumerator SynthesizeAndPlay(string prompt, int voiceId)
         {
             string text = PreProcessNumbers(prompt);
             string delayPunctuationPattern = @"([,.?!;:])";
@@ -173,6 +176,7 @@ namespace PiperTTS
                             delay = questionExclamationDelay;
                             break;
                     }
+
                     if (delay > 0)
                     {
                         yield return new WaitForSeconds(delay);
@@ -185,7 +189,7 @@ namespace PiperTTS
 
                     if (!string.IsNullOrEmpty(cleanedChunk))
                     {
-                        phonemizer.Phonemize(cleanedChunk);
+                        phonemizer.Phonemize(cleanedChunk, voiceId);
 
                         yield return new WaitUntil(() => phonemizer.status == ModelStatus.Ready);
                         yield return new WaitUntil(() => piper.status == ModelStatus.Ready);
@@ -201,6 +205,13 @@ namespace PiperTTS
 
         private void Awake()
         {
+            piperModelPath = Application.streamingAssetsPath + piperModelFilePath;
+            piperConfigPath = Application.streamingAssetsPath + piperConfigFilePath;
+
+            phonemizerModelPath = Application.streamingAssetsPath + phonemizerModelFilePath;
+            phonemizerConfigPath = Application.streamingAssetsPath + phonemizerConfigFilePath;
+            phonemizerDictPath = Application.streamingAssetsPath + phonemizerDictFilePath;
+
             piper = GetComponentInChildren<PiperModel>();
             phonemizer = GetComponentInChildren<PhonemizerModel>();
             audioSource = GetComponent<AudioSource>();
@@ -233,9 +244,9 @@ namespace PiperTTS
             }
         }
 
-        void OnPhonemeResponse(string phonemeString)
+        void OnPhonemeResponse(ResponsePayload payload)
         {
-            piper.Prompt(phonemeString);
+            piper.Prompt(payload.phonemized, payload.voiceId);
         }
 
         void OnResponseGenerated(float[] audioChunk, int sampleRate)

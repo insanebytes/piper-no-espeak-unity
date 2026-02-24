@@ -1,5 +1,5 @@
 {
-    "name": "ai.lookbe.piper",
+    "name": "ai.insanebytes.piper",
     "version": "0.0.1",
     "displayName": "Piper TTS Unity",
     "description": "Piper TTS for Unity",
@@ -10,7 +10,7 @@
         "ai"
     ],
     "author": {
-        "name": "lookbe"
+        "name": "insanebytes"
     },
     "dependencies": {
 		"com.unity.nuget.newtonsoft-json": "3.2.2"

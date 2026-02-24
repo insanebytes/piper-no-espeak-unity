@@ -138,7 +138,7 @@ namespace PiperTTS
             public string Prompt;
         }
 
-        public void Prompt(string prompt)
+        public void Prompt(string prompt,int voiceId)
         {
             if (string.IsNullOrEmpty(prompt))
             {
@@ -158,6 +158,7 @@ namespace PiperTTS
                 return;
             }
 
+			_speakerId = voiceId;
             status = ModelStatus.Generate;
             RunBackground(new PromptPayload() { Prompt = prompt }, RunPrompt);
         }

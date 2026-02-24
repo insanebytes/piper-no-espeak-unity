@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2808657974564647034
+--- !u!1 &4805004045369090904
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,71 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1078335506489242433}
-  - component: {fileID: 8658574255595859382}
-  - component: {fileID: 4089422843974422858}
+  - component: {fileID: 9042422933256030909}
+  - component: {fileID: 677109748142764333}
+  - component: {fileID: 7562746407193165256}
+  m_Layer: 0
+  m_Name: internal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9042422933256030909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4805004045369090904}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5153779301339916423}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &677109748142764333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4805004045369090904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48c476cf08bd63f44804a5ab88a14cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PiperTTS::PiperTTS.PhonemizerModel
+  modelPath: 
+  configPath: 
+  dictPath: 
+--- !u!114 &7562746407193165256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4805004045369090904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4193218995bf1b42925f82f4933ddb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PiperTTS::PiperTTS.PiperModel
+  modelPath: 
+  configPath: 
+--- !u!1 &5262342333504933052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5153779301339916423}
+  - component: {fileID: 1013850617437138065}
+  - component: {fileID: 4322429028110723556}
   m_Layer: 0
   m_Name: PiperTTS
   m_TagString: Untagged
@@ -18,29 +80,49 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1078335506489242433
+--- !u!4 &5153779301339916423
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2808657974564647034}
+  m_GameObject: {fileID: 5262342333504933052}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9176162920894002671}
+  - {fileID: 9042422933256030909}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &8658574255595859382
+--- !u!114 &1013850617437138065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262342333504933052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1545bcb5f7af2344591c9f3568e9ef9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PiperTTS::PiperTTS.PiperTTS
+  piperModelFilePath: /piper/en_US-libritts-high.onnx
+  piperConfigFilePath: /piper/en_US-libritts-high.onnx.json
+  phonemizerModelFilePath: /piper/model.onnx
+  phonemizerConfigFilePath: /piper/tokenizer.json
+  phonemizerDictFilePath: /piper/phoneme_dict.json
+  commaDelay: 0.1
+  periodDelay: 0.5
+  questionExclamationDelay: 0.6
+--- !u!82 &4322429028110723556
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2808657974564647034}
+  m_GameObject: {fileID: 5262342333504933052}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -131,85 +213,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4089422843974422858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2808657974564647034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1545bcb5f7af2344591c9f3568e9ef9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  piperModelPath: D:/ai/onnx/piper/en_US-amy-low.onnx
-  piperConfigPath: D:/ai/onnx/piper/en_US-amy-low.onnx.json
-  phonemizerModelPath: D:/ai/onnx/phonemizer/model.onnx
-  phonemizerConfigPath: D:/ai/onnx/phonemizer/tokenizer.json
-  phonemizerDictPath: D:/ai/onnx/phonemizer/phoneme_dict.json
-  commaDelay: 0.1
-  periodDelay: 0.5
-  questionExclamationDelay: 0.6
---- !u!1 &6672076157527466067
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9176162920894002671}
-  - component: {fileID: 5135370434828297520}
-  - component: {fileID: 9756241008915673}
-  m_Layer: 0
-  m_Name: Internal
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9176162920894002671
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672076157527466067}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1078335506489242433}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5135370434828297520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672076157527466067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4193218995bf1b42925f82f4933ddb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modelPath: 
-  configPath: 
---- !u!114 &9756241008915673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672076157527466067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48c476cf08bd63f44804a5ab88a14cc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modelPath: 
-  configPath: 
-  dictPath: 
